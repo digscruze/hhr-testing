@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-title" content="Home Health Report">
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Health Report™ — First Due Home Safety</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Home Health Report">
+<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@300;600&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400;1,6..12,500;1,6..12,600&display=swap" rel="stylesheet">
   <style>
@@ -2909,44 +2909,6 @@
       color: var(--report-caption);
       letter-spacing: .14em;
     }
-    @media screen and (max-width: 840px) {
-      #reportScreen .glance-overview-grid,
-      #reportScreen .why-block,
-      #reportScreen .action-card-body {
-        grid-template-columns: 1fr;
-      }
-      #reportScreen .glance-count-grid {
-        grid-template-columns: 1fr;
-      }
-      #reportScreen .action-card-head,
-      #reportScreen .finding-head {
-        grid-template-columns: 1fr;
-      }
-      #reportScreen .action-card-no {
-        text-align: left;
-        white-space: normal;
-      }
-      #reportScreen .why-block .why-cell {
-        border-right: 0;
-        border-bottom: 1px solid var(--report-border);
-      }
-      #reportScreen .why-block .why-cell:last-child {
-        border-bottom: 0;
-      }
-      #reportScreen .standard-cover-page .cover-title {
-        font-size: 34px;
-      }
-      #reportScreen .report-score-card .score-value {
-        font-size: 60px;
-      }
-      #reportScreen .specialty-summary-grid {
-        grid-template-columns: 1fr;
-      }
-      #reportScreen .report-service-head {
-        flex-direction: column;
-      }
-    }
-
     /* ============================================================
        CLAUDE REPORT DESIGN SYSTEM — REPORT-ONLY FOUNDATION
        Source: /Downloads/Social Media.zip:
@@ -3054,6 +3016,11 @@
     #reportScreen {
       background: var(--color-bg);
     }
+    .report-viewport {
+      width: 100%;
+      background: var(--color-bg);
+      overflow-x: auto;
+    }
     #reportScreen .doc,
     #reportPages.doc {
       max-width: 920px;
@@ -3090,6 +3057,78 @@
     #reportScreen .report-page-top-spine {
       background: var(--color-primary);
       height: 5px;
+    }
+
+    body.pdf-exporting #reportPages {
+      transform: none !important;
+      width: 816px !important;
+    }
+
+    body.pdf-exporting #reportPages .page,
+    body.pdf-exporting #reportPages .rpage.page,
+    body.pdf-exporting #reportPages .rpage {
+      width: 816px !important;
+      height: 1056px !important;
+      min-height: 1056px !important;
+      max-height: 1056px !important;
+      max-width: none !important;
+      transform: none !important;
+    }
+
+    body.pdf-exporting .report-viewport {
+      overflow: visible !important;
+      padding: 0 !important;
+    }
+
+    #pdfExportRoot {
+      position: fixed;
+      left: -100000px;
+      top: 0;
+      width: 816px;
+      height: auto;
+      overflow: visible;
+      background: #fff;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #pdfExportRoot .doc,
+    #pdfExportRoot .report-pages,
+    #pdfExportRoot .pdf-export-doc {
+      width: 816px !important;
+      max-width: 816px !important;
+      transform: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      gap: 0 !important;
+      background: #fff !important;
+    }
+
+    #pdfExportRoot .page,
+    #pdfExportRoot .rpage,
+    #pdfExportRoot .rpage.page {
+      width: 816px !important;
+      height: 1056px !important;
+      min-width: 816px !important;
+      max-width: 816px !important;
+      min-height: 1056px !important;
+      max-height: 1056px !important;
+      transform: none !important;
+      zoom: 1 !important;
+      margin: 0 !important;
+      overflow: hidden !important;
+      box-shadow: none !important;
+    }
+
+    body.pdf-exporting #pdfExportRoot .page,
+    body.pdf-exporting #pdfExportRoot .rpage,
+    body.pdf-exporting #pdfExportRoot .rpage.page {
+      width: 816px !important;
+      height: 1056px !important;
+      min-width: 816px !important;
+      max-width: 816px !important;
+      min-height: 1056px !important;
+      max-height: 1056px !important;
     }
 
     #reportScreen .ph,
@@ -6938,199 +6977,45 @@
       .member-menu-panel { position: static; width: 100%; margin-top: 8px; }
       .report-history-head { flex-direction: column; }
       .history-visit-row { grid-template-columns: 1fr; align-items: flex-start; }
-      .score-cards-grid { grid-template-columns: 1fr 1fr; }
-      .emergency-grid { grid-template-columns: 1fr; }
-      .rpage { padding: 28px 20px; }
-      .cover-meta-grid { grid-template-columns: 1fr 1fr; }
-      .cover-title { font-size: 26px; }
-      .overall-score-card { flex-direction: column; text-align: center; }
-      .cover-footer { position: static; margin-top: 24px; border-top: 1px solid var(--gray-200); padding-top: 12px; }
     }
 
     @media screen and (max-width: 840px) {
-      #reportScreen .doc,
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      #reportScreen,
+      .report-preview-screen {
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+
+      .report-viewport {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        padding: 12px 0 48px;
+      }
+
       #reportPages.doc {
         max-width: none;
-        padding: 14px 8px 48px;
-      }
-
-      #reportScreen .report-pages,
-      #reportPages {
-        padding: 14px 8px 48px;
-        gap: 14px;
-      }
-
-      #reportScreen .page,
-      #reportScreen .rpage {
-        width: 100%;
-        max-width: 100%;
-        min-height: auto;
-        height: auto;
         padding: 0;
-        border-radius: 0;
-        box-shadow: none;
+        transform-origin: top center;
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      #reportScreen .rpage.cover-page {
-        padding: 0;
-      }
-
-      #reportScreen .ph,
-      #reportScreen .pb,
-      #reportScreen .pf,
-      #reportScreen .report-page-header,
-      #reportScreen .report-page-body,
-      #reportScreen .report-page-footer {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      #reportScreen .ph,
-      #reportScreen .report-page-header {
-        grid-template-columns: auto 1fr;
-        row-gap: 10px;
-      }
-
-      #reportScreen .ph-ref {
-        grid-column: 1 / -1;
-        justify-self: start;
-        text-align: left;
-      }
-
-      #reportScreen .pf,
-      #reportScreen .report-page-footer {
-        grid-template-columns: 1fr;
-        gap: 5px;
-        text-align: left;
-      }
-
-      #reportScreen .pf > :last-child,
-      #reportScreen .report-page-footer > :last-child {
-        justify-self: start;
-        text-align: left;
-      }
-
-      #reportScreen .cover-band {
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 20px;
-      }
-      #reportScreen .cover-visit-info { text-align: left; }
-      #reportScreen .cover-title,
-      #reportScreen .report-display-title,
-      #reportScreen .page-title {
-        font-size: clamp(30px, 10vw, 44px);
-      }
-
-      #reportScreen .cover-bottom,
-      #reportScreen .cover-toc ol,
-      #reportScreen .cover-meta-grid,
-      #reportScreen .cover-photo-fallback {
-        grid-template-columns: 1fr;
-      }
-
-      #reportScreen .cover-meta,
-      #reportScreen .report-meta-grid {
-        grid-template-columns: 1fr;
-      }
-
-      #reportScreen .cover-meta > *,
-      #reportScreen .report-meta-grid > * {
-        border-right: 0;
-        border-bottom: 1px solid var(--color-border);
-      }
-
-      #reportScreen .cover-meta > *:last-child,
-      #reportScreen .report-meta-grid > *:last-child {
-        border-bottom: 0;
-      }
-
-      #reportScreen .cover-property-photo {
-        aspect-ratio: var(--photo-ratio, 1.333);
-        height: auto;
-        max-height: none;
-      }
-      #reportScreen .cover-property-photo img { object-fit: contain; }
-      #reportScreen .at-a-glance-card,
-      #reportScreen .score-cards-grid,
-      #reportScreen .report-score-grid,
-      #reportScreen .report-count-grid,
-      #reportScreen .glance-overview-grid,
-      #reportScreen .glance-count-grid,
-      #reportScreen .exec-grid,
-      #reportScreen .counts,
-      #reportScreen .action-card-head,
-      #reportScreen .action-card-body,
-      #reportScreen .why-block,
-      #reportScreen .emergency-grid,
-      #reportScreen .emerg-grid,
-      #reportScreen .report-info-grid,
-      #reportScreen .report-photo-grid,
-      #reportScreen .photos-grid,
-      #reportScreen .rx-service-grid,
-      #reportScreen .annual-summary-grid,
-      #reportScreen .specialty-summary-grid,
-      #reportScreen .before-after-report-grid,
-      #reportScreen .signoff-grid,
-      #reportScreen .signature-row {
-        grid-template-columns: 1fr !important;
-      }
-
-      #reportScreen .emerg-card.span2 {
-        grid-column: auto;
-      }
-
-      #reportScreen .rx-row,
-      #reportScreen .visit,
-      #reportScreen .find-row,
-      #reportScreen .kv {
-        grid-template-columns: 1fr;
-        align-items: start;
-      }
-
-      #reportScreen table.cats,
-      #reportScreen .report-info-table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      #reportScreen .report-ref-chip,
-      #reportScreen .finding-chip,
-      #reportScreen .ref-pill,
-      #reportScreen .status-pill,
-      #reportScreen .status-badge,
-      #reportScreen .report-status-pill,
-      #reportScreen .pill {
-        max-width: 100%;
-        white-space: normal;
-      }
-      #reportScreen .finding-head,
-      #reportScreen .find-detail-head {
-        grid-template-columns: 1fr !important;
-      }
-      #reportScreen .finding-summary,
-      #reportScreen .action-card-no {
-        white-space: normal;
-        text-align: left;
-      }
-      #reportScreen .component-block,
-      #reportScreen .finding-card,
-      #reportScreen .summary-card,
-      #reportScreen .action-plan-card {
-        max-width: 100%;
-      }
-      #reportScreen .finding-photo-frame,
-      #reportScreen .report-photo-card,
-      #reportScreen .photo-card {
-        max-width: 100%;
-      }
-      #reportScreen .finding-photo-frame img,
-      #reportScreen .report-photo-card img,
-      #reportScreen .photo-frame img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+      #reportPages .page,
+      #reportPages .rpage.page,
+      #reportPages .rpage {
+        width: 816px !important;
+        height: 1056px !important;
+        min-height: 1056px !important;
+        max-width: none !important;
       }
     }
 
@@ -7946,8 +7831,11 @@
       </div>
     </div>
   </div>
-  <div class="report-pages doc" id="reportPages"></div>
+  <div id="reportViewport" class="report-viewport">
+    <div class="report-pages doc" id="reportPages"></div>
+  </div>
   <div class="print-page-footer" id="printPageFooter"></div>
+  <div id="pdfExportRoot" aria-hidden="true"></div>
 </div>
 
 <!-- Toast -->
@@ -10125,6 +10013,55 @@ function updateReportPageNumbers() {
       footerRight.innerHTML = `<b data-page-current>${currentText}</b> / <b data-page-total>${totalText}</b>${isTermsPage ? ' <span class="end-report-marker">· END OF REPORT</span>' : ''}`;
     }
   });
+  scaleReportPreviewForViewport();
+}
+
+function debounce(fn, wait = 100) {
+  let timer = null;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), wait);
+  };
+}
+
+function scaleReportPreviewForViewport() {
+  const viewport = document.getElementById('reportViewport');
+  const pages = document.getElementById('reportPages');
+  if (!viewport || !pages) return;
+
+  if (document.body.classList.contains('pdf-exporting')) {
+    pages.style.transform = 'none';
+    pages.style.transformOrigin = 'top left';
+    pages.style.width = '816px';
+    pages.style.marginBottom = '';
+    viewport.style.minHeight = '';
+    viewport.style.overflowX = 'visible';
+    return;
+  }
+
+  const pageWidth = 816;
+  const isMobilePreview = window.innerWidth <= 840;
+  if (!isMobilePreview) {
+    pages.style.transform = '';
+    pages.style.transformOrigin = '';
+    pages.style.width = '';
+    pages.style.marginBottom = '';
+    viewport.style.minHeight = '';
+    viewport.style.overflowX = '';
+    return;
+  }
+
+  const availableWidth = Math.max(320, viewport.clientWidth - 24);
+  const scale = Math.min(1, availableWidth / pageWidth);
+  const reportHeight = pages.scrollHeight || Array.from(pages.querySelectorAll('.page, .rpage'))
+    .reduce((sum, page) => sum + page.offsetHeight + 28, 0);
+
+  pages.style.transform = `scale(${scale})`;
+  pages.style.transformOrigin = 'top center';
+  pages.style.width = `${pageWidth}px`;
+  pages.style.marginBottom = `${Math.ceil(reportHeight * (scale - 1))}px`;
+  viewport.style.minHeight = `${Math.ceil(reportHeight * scale)}px`;
+  viewport.style.overflowX = 'hidden';
 }
 
 function warnIfReportPagesOverflow() {
@@ -10423,6 +10360,7 @@ function showScreen(name) {
     showFormFooter();
   }
   window.scrollTo(0,0);
+  if (name === 'report') requestAnimationFrame(scaleReportPreviewForViewport);
 }
 
 function handleLogoHomeClick() {
@@ -15095,12 +15033,54 @@ async function exportReportPdf() {
   return exportToPDF();
 }
 
+function createPdfExportRoot() {
+  const root = document.createElement('div');
+  root.id = 'pdfExportRoot';
+  root.setAttribute('aria-hidden', 'true');
+  const reportScreen = document.getElementById('reportScreen');
+  (reportScreen || document.body).appendChild(root);
+  return root;
+}
+
+function normalizeExportClone(root) {
+  if (!root) return;
+
+  root.style.width = '816px';
+  root.style.maxWidth = '816px';
+  root.style.transform = 'none';
+  root.style.transformOrigin = 'top left';
+  root.style.margin = '0';
+  root.style.marginBottom = '0';
+  root.style.padding = '0';
+  root.style.gap = '0';
+
+  const pages = root.querySelectorAll('.page, .rpage');
+  pages.forEach(page => {
+    page.classList.add('page');
+    page.style.display = 'flex';
+    page.style.flexDirection = 'column';
+    page.style.visibility = 'visible';
+    page.style.opacity = '1';
+    page.style.width = '816px';
+    page.style.height = '1056px';
+    page.style.minWidth = '816px';
+    page.style.maxWidth = '816px';
+    page.style.minHeight = '1056px';
+    page.style.maxHeight = '1056px';
+    page.style.transform = 'none';
+    page.style.transformOrigin = 'top left';
+    page.style.zoom = '1';
+    page.style.margin = '0';
+    page.style.overflow = 'hidden';
+    page.style.boxShadow = 'none';
+    page.style.boxSizing = 'border-box';
+  });
+}
+
 async function exportToPDF() {
   if (state.screen === 'form') await autosaveReportDraft({ immediate:true });
-  const pages = Array.from(
-    document.querySelectorAll(
-      '#reportPages .page, #reportPages .rpage'));
-  if (!pages.length) {
+  const source = document.getElementById('reportPages');
+  if (!source || !source.querySelector('.page, .rpage')) {
     showToast('No report content to export.');
     return;
   }
@@ -15111,45 +15091,11 @@ async function exportToPDF() {
   const PAGE_HEIGHT_PX = 1056;
   const scale = 2;
   const { jsPDF } = window.jspdf;
+  const exportRoot = document.getElementById('pdfExportRoot') || createPdfExportRoot();
 
   showToast('Generating PDF — please wait…');
-  await waitForReportAssets();
-  warnIfReportPagesOverflow();
 
-  const originalStyles = pages.map(p => ({
-    width: p.style.width,
-    height: p.style.height,
-    maxHeight: p.style.maxHeight,
-    overflow: p.style.overflow,
-    minHeight: p.style.minHeight,
-    display: p.style.display,
-    flexDirection: p.style.flexDirection,
-    visibility: p.style.visibility,
-    opacity: p.style.opacity,
-    boxSizing: p.style.boxSizing,
-  }));
-
-  const footerEls = Array.from(
-    document.querySelectorAll(
-      '#reportPages .report-page-footer'));
-  const originalFooterStyles = footerEls.map(f => ({
-    display: f.style.display,
-    visibility: f.style.visibility,
-  }));
-  pages.forEach(page => {
-    page.style.display = 'flex';
-    page.style.flexDirection = 'column';
-    page.style.visibility = 'visible';
-    page.style.opacity = '1';
-    page.style.width = PAGE_WIDTH_PX + 'px';
-    page.style.height = PAGE_HEIGHT_PX + 'px';
-    page.style.minHeight = PAGE_HEIGHT_PX + 'px';
-    page.style.maxHeight = PAGE_HEIGHT_PX + 'px';
-    page.style.overflow = 'hidden';
-    page.style.boxSizing = 'border-box';
-  });
-
-  await new Promise(r => setTimeout(r, 600));
+  document.body.classList.add('pdf-exporting');
 
   async function waitForImages(el) {
     await waitForReportAssets(el);
@@ -15180,12 +15126,15 @@ async function exportToPDF() {
       backgroundColor: '#ffffff',
       width: PAGE_WIDTH_PX,
       height: PAGE_HEIGHT_PX,
+      x: 0,
+      y: 0,
       scrollX: 0,
       scrollY: 0,
       windowWidth: PAGE_WIDTH_PX,
       windowHeight: PAGE_HEIGHT_PX,
       logging: false,
       imageTimeout: 15000,
+      removeContainer: true,
     };
 
     const canvas = await html2canvas(page, baseOptions);
@@ -15213,6 +15162,23 @@ async function exportToPDF() {
   }
 
   try {
+    exportRoot.innerHTML = '';
+    const exportClone = source.cloneNode(true);
+    exportClone.id = 'reportPagesExport';
+    exportClone.classList.add('pdf-export-doc');
+    exportRoot.appendChild(exportClone);
+    normalizeExportClone(exportClone);
+
+    await new Promise(requestAnimationFrame);
+    await new Promise(requestAnimationFrame);
+
+    exportClone.getBoundingClientRect();
+    const pages = Array.from(exportClone.querySelectorAll('.page, .rpage'));
+    pages.forEach(page => page.getBoundingClientRect());
+
+    await waitForReportAssets(exportClone);
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
     const pageImages = [];
 
     for (let i = 0; i < pages.length; i++) {
@@ -15225,6 +15191,7 @@ async function exportToPDF() {
       orientation: 'portrait',
       unit: 'mm',
       format: 'letter',
+      compress: true,
     });
 
     let isFirstPage = true;
@@ -15249,25 +15216,9 @@ async function exportToPDF() {
     console.error('PDF export error:', err);
     showToast('PDF export failed — ' + err.message);
   } finally {
-    pages.forEach((page, i) => {
-      const o = originalStyles[i];
-      page.style.width = o.width;
-      page.style.height = o.height;
-      page.style.maxHeight = o.maxHeight;
-      page.style.overflow = o.overflow;
-      page.style.minHeight = o.minHeight;
-      page.style.display = o.display;
-      page.style.flexDirection = o.flexDirection;
-      page.style.visibility = o.visibility;
-      page.style.opacity = o.opacity;
-      page.style.boxSizing = o.boxSizing;
-      delete page.dataset.pdfPageIndex;
-    });
-    footerEls.forEach((f, i) => {
-      const o = originalFooterStyles[i];
-      f.style.display = o.display;
-      f.style.visibility = o.visibility;
-    });
+    exportRoot.innerHTML = '';
+    document.body.classList.remove('pdf-exporting');
+    scaleReportPreviewForViewport();
   }
 }
 
@@ -19657,6 +19608,8 @@ async function init() {
   await refreshMembersFromDB();
   window.__fdToggleOptional = toggleItemOptional;
   window.removeItemPhoto = removeItemPhoto;
+  window.addEventListener('resize', debounce(scaleReportPreviewForViewport, 100));
+  window.addEventListener('orientationchange', () => setTimeout(scaleReportPreviewForViewport, 250));
   resetHomeScreen();
   renderHeaderActions();
 }
